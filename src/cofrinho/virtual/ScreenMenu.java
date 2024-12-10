@@ -4,15 +4,15 @@ import java.util.Scanner;
 
 public class ScreenMenu {
 
-	private Scanner put1;
-	private Cofre cofrinho; //Instância a classe Cofre para isntaurar os métodos.
+	private Scanner put1; // Scanner para capturar entradas do usuário
+	private Cofre cofrinho; // Instância da classe Cofre para manipular as moedas no cofre
 	
 	public ScreenMenu() {
 		put1 = new Scanner(System.in);
 		cofrinho = new Cofre();
-		
-}
-
+		}
+	
+    // Desenho estilizado para o menu inicial
 	public void exibirMenu() {
 		
         System.out.println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
@@ -54,7 +54,7 @@ public class ScreenMenu {
         System.out.print("Digite sua opção: ");
 		String option = put1.next();
 	
-		//funcionalidade do Menu principal
+        // Funcionalidade do Menu Principal: Switch para gerenciar as opções escolhidas
 		switch (option) {
 			case "0": 
 				System.out.println("Finalizando operação!");
@@ -66,11 +66,14 @@ public class ScreenMenu {
 				System.out.println("2 - Dolar");
 				System.out.println("3 - Euro");
 				
-				int opcaoMoeda = put1.nextInt();
-				
+				int opcaoMoeda = put1.nextInt(); // Captura da opção de moeda
+				 
 				System.out.println("Digite o valor: ");
 				double valorMoeda = put1.nextDouble();
 				
+				
+				// Criação de instâncias das subclasses de Moeda (polimorfismo)
+                // Aqui, a classe mãe "Moeda" tem métodos que são implementados de maneira específica nas classes filhas (Real, Dolar, Euro)
 				if (opcaoMoeda == 1){
 					Real moeda = new Real(valorMoeda);
 					cofrinho.adicionar(moeda);
@@ -99,6 +102,8 @@ public class ScreenMenu {
 				System.out.println("Digite o valor: ");
 				double valorMoeda1 = put1.nextDouble();
 				
+                // Remoção de moeda de acordo com a escolha do usuário
+                // Polimorfismo em ação: o método `remover` pode ser chamado com diferentes tipos de moeda
 				if (opcaoMoeda1 == 1){
 					Real moeda = new Real(valorMoeda1);
 					cofrinho.remover(moeda);
@@ -109,7 +114,7 @@ public class ScreenMenu {
 					Euro moeda = new Euro(valorMoeda1);
 					cofrinho.remover(moeda);
 						} else {
-					System.out.println("Não existe essa moeda");
+					System.out.println("Não contém esta moeda no banco, opção inválida!");
 					}
 					
 				exibirMenu();	
@@ -117,17 +122,18 @@ public class ScreenMenu {
 				exibirMenu();
 				break;
 				
-			case "3": //Listar Moedas
-				cofrinho.listagemMoedas();
+			case "3": // Listar Moedas
+				cofrinho.listagemMoedas(); // Chama o método da classe Cofre para listar as moedas
 				exibirMenu();
 				break;
 				
-			case "4": //converter 
+			case "4": // Converter o total para reais
 				double convertedValue = cofrinho.totalConvertido();
 				System.out.println("Valor total, convertido para reais: " + convertedValue);
 				exibirMenu();
 				break;
-			default: //voltar para o menu, caso não seja escolhido 
+				
+			default: //Caso o usuário insira uma opção inválida
 				System.out.println("Tente novamente!");
 				exibirMenu();
 				break;

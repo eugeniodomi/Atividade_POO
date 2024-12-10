@@ -3,53 +3,49 @@ package cofrinho.virtual;
 import java.util.ArrayList;
 
 public class Cofre {
-	
+	// Lista para armazenar as moedas
 private ArrayList<Moeda> coinList;
-	
+	//Construtor que inicializa a lista de moedas
 	public Cofre() {
 		this.coinList = new ArrayList<>();
 			
 	}
-	//adiciona moedas na lista
+	// Adiciona uma moeda à lista
 	public void adicionar(Moeda moeda) {
 		this.coinList.add(moeda);
 	}
-	//remove moedas na lista
+	// Remove uma moeda da lista
 	public void remover(Moeda moeda) {
 		this.coinList.remove(moeda);
 	}
 	
 	
 	
-	// exibe moedas 
+	// Exibe as informações de todas as moedas no cofre 
 	public void listagemMoedas () {
 		
 		if (this.coinList.isEmpty()) {
 			System.out.println("Seu cofrinho está vazio :(");
 			return;
 		} else
+			// Chama o método info() de cada moeda (polimorfismo)
 			for (Moeda moeda : this.coinList) {
 			moeda.info();
 		}
 	}
 
 	
-	//método converte o valor e acumula o valor convertido e retorna o valor total da conversão 
+	// Converte o valor total das moedas e retorna o valor acumulado
 	public double totalConvertido() {
-		if (this.coinList.isEmpty()) {
-			return 0.0;
-		}
-		
-		if (this.coinList.size() == 1) {
-			return 1.0;
-		}
-		
-		double valorAcumulado = 0;
-		for (Moeda moeda : this.coinList) {
-			valorAcumulado = valorAcumulado + moeda.converter();
-		} 
-		return valorAcumulado;
+	    if (this.coinList.isEmpty()) {
+	        return 0.0;
+	    }
+	    
+	    double valorAcumulado = 0;
+	    for (Moeda moeda : this.coinList) {
+	        valorAcumulado += moeda.converter();
+	    } 
+	    return valorAcumulado;
 	}
 }
-
 
